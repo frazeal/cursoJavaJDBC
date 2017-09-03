@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.caelum.jdbc.DataBase;
+import br.com.caelum.jdbc.ConnectionPool;
 
 public class TestaInsercaoParametros {
 	public static void main(String[] args) throws SQLException {
-		try (Connection conexao = DataBase.getConnection()) {
+		try (Connection conexao = new ConnectionPool().getConnection()) {
 			conexao.setAutoCommit(false);
 			String sqlString = "INSERT INTO PRODUTOS (NOME, DESCRICAO) VALUES (?, ?)";
 

@@ -5,11 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.caelum.jdbc.DataBase;
+import br.com.caelum.jdbc.ConnectionPool;
 
 public class TestaInsercao {
 	public static void main(String[] args) throws SQLException {
-		try (Connection conexao = DataBase.getConnection()) {
+		try (Connection conexao = new ConnectionPool().getConnection()) {
 			Statement sqlQuery = conexao.createStatement();
 			boolean resultado = sqlQuery.execute(
 					"INSERT INTO PRODUTOS (NOME, DESCRICAO) VALUES ('Notebook', 'Notebook i5')",
