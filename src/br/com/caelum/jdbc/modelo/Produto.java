@@ -2,8 +2,8 @@ package br.com.caelum.jdbc.modelo;
 
 public class Produto {
 	private int id;
-	private String nome;
-	private String descricao;
+	private final String nome;
+	private final String descricao;
 
 	public Produto(String nome, String descricao) {
 		this.nome = nome;
@@ -14,18 +14,10 @@ public class Produto {
 		return nome;
 	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
 	
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 	public void setId(int id) {
 		this.id = id;
 	}

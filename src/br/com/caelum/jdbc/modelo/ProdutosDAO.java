@@ -65,7 +65,7 @@ public class ProdutosDAO {
 
 		try (PreparedStatement stmt = this.conexao.prepareStatement(sqlQuery)) {
 
-			stmt.setLong(1, id);
+			stmt.setInt(1, id);
 			stmt.execute();
 
 			try (ResultSet rs = stmt.getResultSet()) {
@@ -78,6 +78,29 @@ public class ProdutosDAO {
 		}
 
 		return produto;
+	}
+	
+	public List<Produto> buscarProdutosPorCategoria(Categoria categoria) throws SQLException {
+		List<Produto> produtos = new ArrayList<Produto>();
+
+		String sqlQuery = "SELECT * FROM PRODUTOS WHERE CATEGORIA_ID = ?";
+
+		try (PreparedStatement stmt = this.conexao.prepareStatement(sqlQuery)) {
+
+			stmt.setInt(1, categoria.getId());
+			stmt.execute();
+
+			try (ResultSet rs = stmt.getResultSet()) {
+				while (rs.next()) {
+					Produto produto = new Produto(rs.getString("nome"), rs.getString("descricao"));
+					produto.setId(rs.getInt("id"));
+					produtos.add(produto);
+				}
+			}
+
+		}
+
+		return produtos;
 	}
 
 	public void apagar(int id) throws SQLException {
